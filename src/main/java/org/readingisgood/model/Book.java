@@ -6,6 +6,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
 public class Book extends PanacheEntity {
-    public String title;
-    public Integer stock;
+
+  public String title;
+  public Integer stock;
 }

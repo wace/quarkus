@@ -17,27 +17,30 @@ import org.readingisgood.model.Book;
 @Path("/book")
 public class BookResource {
 
-    @GET
-    public List<Book> books() {
-        return Book.listAll();
-    }
+  @GET
+  public List<Book> books() {
+    return Book.listAll();
+  }
 
-    @POST
-    @Transactional
-    public Response create(Book book) {
-        book.persist();
-        return  Response.status(Status.CREATED).entity(book).build();
-    }
+  @POST
+  @Transactional
+  public Response create(Book book) {
+    book.persist();
+    return Response.status(Status.CREATED).entity(book).build();
+  }
 
-    @PUT
-    @Path("/{id}")
-    @Transactional
-    public Response updateStock(@PathParam("id") Long id, Book book) {
-        Book entity = Book.findById(id);
-        if (entity == null) {
-            throw new WebApplicationException("Book with id of " + id + " does not exist.", 404);
-        }
-        entity.stock = book.stock;
-        return  Response.status(Status.OK).entity(book).build();
+  @PUT
+  @Path("/{id}")
+  @Transactional
+  public Response updateStock(@PathParam("id") Long id, Book book) {
+    Book entity = Book.findById(id);
+    if (entity == null) {
+      throw new WebApplicationException(
+        "Book with id of " + id + " does not exist.",
+        404
+      );
     }
+    entity.stock = book.stock;
+    return Response.status(Status.OK).entity(book).build();
+  }
 }

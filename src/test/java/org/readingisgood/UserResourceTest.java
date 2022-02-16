@@ -33,10 +33,10 @@ public class UserResourceTest {
     createTestUser("Test User 1");
 
     given()
-        .when()
-        .get("/users")
-        .then()
-        .body("$.size()", is(1), "[0].name", is("Test User 1"));
+      .when()
+      .get("/users")
+      .then()
+      .body("$.size()", is(1), "[0].name", is("Test User 1"));
   }
 
   @Test
@@ -44,18 +44,18 @@ public class UserResourceTest {
     User user = new User();
     user.name = "Test User 2";
     given()
-        .contentType("application/json")
-        .body(user)
-        .when()
-        .post("/users")
-        .then()
-        .statusCode(201);
+      .contentType("application/json")
+      .body(user)
+      .when()
+      .post("/users")
+      .then()
+      .statusCode(201);
 
     given()
-        .when()
-        .get("/users")
-        .then()
-        .body("$.size()", is(1), "[0].name", is("Test User 2"));
+      .when()
+      .get("/users")
+      .then()
+      .body("$.size()", is(1), "[0].name", is("Test User 2"));
   }
 
   @Test
@@ -64,29 +64,29 @@ public class UserResourceTest {
     user.name = "Test User updated";
 
     given()
-        .contentType("application/json")
-        .body(user)
-        .when()
-        .put("/users/" + user.id)
-        .then()
-        .statusCode(200);
+      .contentType("application/json")
+      .body(user)
+      .when()
+      .put("/users/" + user.id)
+      .then()
+      .statusCode(200);
 
     given()
-        .when()
-        .get("/users")
-        .then()
-        .body("$.size()", is(1), "[0].name", is("Test User updated"));
+      .when()
+      .get("/users")
+      .then()
+      .body("$.size()", is(1), "[0].name", is("Test User updated"));
   }
 
   @Test
   public void deleteUser() {
     User user = createTestUser("Test User 4");
     given()
-        .contentType("application/json")
-        .body(user)
-        .when()
-        .delete("/users/" + user.id)
-        .then()
-        .statusCode(204);
+      .contentType("application/json")
+      .body(user)
+      .when()
+      .delete("/users/" + user.id)
+      .then()
+      .statusCode(204);
   }
 }

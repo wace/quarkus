@@ -20,43 +20,49 @@ import org.readingisgood.repository.UserRepository;
 @Path("/users")
 public class UserResource {
 
-    @Inject
-    UserRepository repository;
+  @Inject
+  UserRepository repository;
 
-    @GET
-    public List<User> users() {
-        return User.listAll();
-    }
+  @GET
+  public List<User> users() {
+    return User.listAll();
+  }
 
-    @POST
-    @Transactional
-    public Response create(User user) {
-        user.persist();
-        return Response.status(Status.CREATED).entity(user).build();
-    }
+  @POST
+  @Transactional
+  public Response create(User user) {
+    user.persist();
+    return Response.status(Status.CREATED).entity(user).build();
+  }
 
-    @PUT
-    @Path("/{id}")
-    @Transactional
-    public Response update(@PathParam("id") Long id, User user) {
-        User entity = User.findById(id);
-        repository.findAll();
-        if (entity == null) {
-            throw new WebApplicationException("User with id of " + id + " does not exist.", 404);
-        }
-        entity.name = user.name;
-        return Response.status(Status.OK).entity(user).build();
+  @PUT
+  @Path("/{id}")
+  @Transactional
+  public Response update(@PathParam("id") Long id, User user) {
+    User entity = User.findById(id);
+    repository.findAll();
+    if (entity == null) {
+      throw new WebApplicationException(
+        "User with id of " + id + " does not exist.",
+        404
+      );
     }
+    entity.name = user.name;
+    return Response.status(Status.OK).entity(user).build();
+  }
 
-    @DELETE
-    @Path("/{id}")
-    @Transactional
-    public Response delete(@PathParam("id") Long id) {
-        User entity = User.findById(id);
-        if (entity == null) {
-            throw new WebApplicationException("User with id of " + id + " does not exist.", 404);
-        }
-        entity.delete();
-        return Response.status(204).build();
+  @DELETE
+  @Path("/{id}")
+  @Transactional
+  public Response delete(@PathParam("id") Long id) {
+    User entity = User.findById(id);
+    if (entity == null) {
+      throw new WebApplicationException(
+        "User with id of " + id + " does not exist.",
+        404
+      );
     }
+    entity.delete();
+    return Response.status(204).build();
+  }
 }

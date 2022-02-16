@@ -8,9 +8,9 @@ import javax.ws.rs.core.MediaType;
 @Path("/isAlive")
 public class IsAliveResource {
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String isAlive() {
-        return "isAlive";
-    }
+  @GET
+  @Produces(MediaType.TEXT_PLAIN)
+  public String isAlive() {
+    return "isAlive";
+  }
 }
