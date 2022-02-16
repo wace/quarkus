@@ -88,6 +88,5 @@ public class UserResourceTest {
         .delete("/users/" + user.id)
         .then()
         .statusCode(204);
-
   }
 }
