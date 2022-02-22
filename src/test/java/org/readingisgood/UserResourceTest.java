@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.readingisgood.model.BookOrder;
 import org.readingisgood.model.User;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -17,6 +18,7 @@ public class UserResourceTest {
   @BeforeEach
   @Transactional
   public void setUp() {
+    BookOrder.deleteAll();
     User.deleteAll();
   }
 
