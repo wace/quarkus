@@ -2,7 +2,6 @@ package org.readingisgood.resource;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,13 +14,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.readingisgood.model.User;
-import org.readingisgood.repository.UserRepository;
 
 @Path("/users")
 public class UserResource {
-
-  @Inject
-  UserRepository repository;
 
   @GET
   public List<User> users() {
@@ -40,7 +35,7 @@ public class UserResource {
   @Transactional
   public Response update(@PathParam("id") Long id, User user) {
     User entity = User.findById(id);
-    repository.findAll();
+    User.findAll();
     if (entity == null) {
       throw new WebApplicationException(
         "User with id of " + id + " does not exist.",
